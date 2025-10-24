@@ -9,3 +9,6 @@ choose varient - javascipt
 rolldown-vite - no
 instll with npm - yes
 Enter - Enter
+
+install react router dom in Y:\Foodime\Foodime-frontent
+npm install react router dom

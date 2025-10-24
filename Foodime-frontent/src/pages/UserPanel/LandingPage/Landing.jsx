@@ -6,7 +6,7 @@ import Typed from "typed.js";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"; // 🔹 Social Icons
 import "./Landing.css";
 
-const bgVideo = "src/assets/bg-v.mp4";
+const bgVideo = "/assets/bg-v.mp4";
 
 function Landing() {
   const typedRef = useRef(null);

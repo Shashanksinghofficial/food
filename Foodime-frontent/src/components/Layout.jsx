@@ -130,7 +130,7 @@ const Layout = () => {
         <div className="top-left">
           <div className="logo-container">
             <img
-              src="public/assets/brandlogo.png"
+              src="/assets/brandlogo.png"
               alt="Logo"
               className="topbar-logo"
             />

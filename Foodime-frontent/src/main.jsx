@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* ✅ यह basename बिल्कुल vite.config.js में base से मेल खाना चाहिए */}
-    <BrowserRouter basename="/foodime/">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </React.StrictMode>

@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
+// ✅ Default configuration (root path /)
 export default defineConfig({
   plugins: [react()],
-})
+  base: "/", // optional but safe to keep
+});

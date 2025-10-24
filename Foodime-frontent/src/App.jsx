@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+// Layout
+import Layout from "./components/Layout";
+
+// User Panel Pages
+import Landing from "./pages/UserPanel/LandingPage/Landing";
+import Registration from "./pages/UserPanel/UserRegistrationPage/Registration";
+import Signup from "./pages/UserPanel/LoginSignupPage/Signup";
+import Login from "./pages/UserPanel/LoginSignupPage/Login";
+import ShopPage from "./pages/UserPanel/UserHomePage/ShopPage";
+import CartPage from "./pages/UserPanel/UserHomePage/CartPage";
+import AccountPage from "./pages/UserPanel/UserHomePage/AccountPage";
+import ProductDetail from "./pages/UserPanel/ProductPage/ProductDetail.jsx"; // ✅ fixed
+
+// Delivery Panel Pages
+import DeliveryLogin from "./pages/DeliveryPanel/DeliveryLogin";
+import DeliveryPanel from "./pages/DeliveryPanel/DeliveryPanel";
+import DeliveryRegister from "./pages/DeliveryPanel/DeliveryRegister";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Simple delivery user authentication check
+  const isAuthenticated = () =>
+    localStorage.getItem("foodimeDeliveryUser") !== null;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      {/* 1. Public Routes (no layout) */}
+      <Route path="/" element={<Landing />} />
+      <Route path="/registration" element={<Registration />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/delivery-login" element={<DeliveryLogin />} />
+      <Route path="/delivery-register" element={<DeliveryRegister />} />
+
+      {/* 2. Routes with Layout (Header + Footer) */}
+      <Route element={<Layout />}>
+        <Route path="/homepage" element={<ShopPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/account" element={<AccountPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />{" "}
+        {/* ✅ Added */}
+      </Route>
+
+      {/* 3. Delivery Panel Route (authenticated only) */}
+      <Route
+        path="/delivery-panel"
+        element={
+          isAuthenticated() ? (
+            <DeliveryPanel />
+          ) : (
+            <Navigate to="/delivery-login" />
+          )
+        }
+      />
+
+      {/* 4. Catch-all route */}
+      <Route path="*" element={<div>404 - Page Not Found (Foodime App)</div>} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
